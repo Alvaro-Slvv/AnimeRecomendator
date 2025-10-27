@@ -1,47 +1,48 @@
-# Back/Trainer/trainer.py
-
+import pandas as pd
+import os
 import pickle
-import json
-from pathlib import Path
 from datetime import datetime
-from Back.Trainer.preprocess import load_and_clean_data
+from pathlib import Path
+from Back.Data.dao import DataDAO
 
-DATA_DIR = Path("Back/Data")
-MODELS_DIR = DATA_DIR / "models"
-MODELS_DIR.mkdir(exist_ok=True)
+dao = DataDAO()
 
-MODEL_TRACK_FILE = DATA_DIR / "current_model.json"
-
-def get_current_model_version() -> str:
-    if MODEL_TRACK_FILE.exists():
-        with open(MODEL_TRACK_FILE, "r") as f:
-            data = json.load(f)
-        return data.get("current_version", "v0")
-    return "v0"
 
 def train_model():
-    anime, ratings = load_and_clean_data(DATA_DIR)
+    anime = dao.load_anime()
+    ratings_raw = dao.load_ratings()
 
-    print("📈 Building correlation matrix...")
-    pivot = ratings.pivot_table(index="user_id", columns="anime_id", values="rating")
-    corr_matrix = pivot.corr(method="pearson", min_periods=10)
+    ratings_raw = ratings_raw.rename(columns={
+        "user_id": "user_id",
+        "anime_id": "anime_id",
+        "rating": "rating"
+    })
 
-    current_version = get_current_model_version()
-    new_version_num = int(current_version.strip("v")) + 1 if current_version != "v0" else 1
-    new_version = f"v{new_version_num}"
+    user_counts = ratings_raw["user_id"].value_counts()
+    active_users = user_counts[user_counts >= 200].index
+    ratings = ratings_raw[ratings_raw["user_id"].isin(active_users)]
 
-    corr_path = MODELS_DIR / f"anime_corr_{new_version}.pkl"
-    meta_path = MODELS_DIR / f"anime_corr_meta_{new_version}.pkl"
+    anime_counts = ratings["anime_id"].value_counts()
+    popular_anime = anime_counts[anime_counts >= 50].index
+    ratings = ratings[ratings["anime_id"].isin(popular_anime)]
+    ratings = ratings[ratings["rating"] != -1]
+
+    base_dir = Path("Back/Model")
+    base_dir.mkdir(parents=True, exist_ok=True)
+
+    version = datetime.now().strftime("v%Y%m%d_%H%M%S")
+    corr_path = base_dir / f"anime_corr_matrix_{version}.pkl"
+    meta_path = base_dir / f"anime_corr_meta_{version}.pkl"
+
+    anime_pivot = ratings.pivot_table(index="user_id", columns="anime_id", values="rating")
+    anime_corr_matrix = anime_pivot.corr(method="pearson", min_periods=10)
 
     with open(corr_path, "wb") as f:
-        pickle.dump(corr_matrix, f)
+        pickle.dump(anime_corr_matrix, f)
 
-    meta = {"num_users": pivot.shape[0], "num_anime": pivot.shape[1], "trained_on": str(datetime.now())}
+    meta = {"num_users": anime_pivot.shape[0], "num_anime": anime_pivot.shape[1]}
     with open(meta_path, "wb") as f:
         pickle.dump(meta, f)
 
-    with open(MODEL_TRACK_FILE, "w") as f:
-        json.dump({"current_version": new_version}, f, indent=4)
-
-    print(f"✅ Model trained successfully — version {new_version}")
-    return meta, new_version
+    dao.save_model_version(version)
+    return meta

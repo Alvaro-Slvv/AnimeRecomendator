@@ -64,7 +64,6 @@ def get_watched(user_id: int):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# 🎯 USER-BASED RECOMMENDATION ENDPOINT
 @app.get("/recommend/user/{user_id}")
 def recommend_for_user(user_id: int):
     """Get personalized anime recommendations for a user."""
@@ -73,7 +72,7 @@ def recommend_for_user(user_id: int):
         return {"status": "error", "message": "No recommendations found for this user"}
     return {"status": "success", "user_id": user_id, "recommendations": recs.to_dict(orient="records")}
 
-# 🎬 ANIME-BASED RECOMMENDATION ENDPOINT
+
 @app.get("/recommend/anime/{anime_id}")
 def recommend_for_anime(anime_id: int):
     """Get similar anime recommendations based on a given anime ID."""

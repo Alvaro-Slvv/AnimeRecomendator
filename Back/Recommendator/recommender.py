@@ -1,6 +1,5 @@
 # Back/Recommendator/recommender.py
 
-import pickle
 import pandas as pd
 from pathlib import Path
 from Back.Trainer.trainer import get_current_model_version
@@ -8,7 +7,6 @@ from Back.Trainer.trainer import get_current_model_version
 DATA_DIR = Path("Back/Data")
 MODELS_DIR = DATA_DIR / "models"
 
-# --- Load base data ---
 anime = pd.read_csv(DATA_DIR / "anime.csv")
 ratings = pd.read_csv(DATA_DIR / "rating.csv")
 
@@ -25,7 +23,6 @@ def load_current_model():
 
 
 def get_user_watched(user_id: int):
-    """Return anime watched and rated by a user."""
     watched = ratings[ratings["user_id"] == user_id]
     return watched.merge(anime[["anime_id", "name"]], on="anime_id", how="left")
 
@@ -50,7 +47,6 @@ def get_similar_anime(anime_id, min_ratings=100, top_n=20, genre_weight=0.2, rat
 
     filtered = filtered.merge(anime[["anime_id", "name", "genre", "rating"]], on="anime_id", how="left")
 
-    # --- Genre Similarity ---
     def genre_similarity(g1, g2):
         if pd.isna(g1) or pd.isna(g2):
             return 0
@@ -73,7 +69,6 @@ def get_similar_anime(anime_id, min_ratings=100, top_n=20, genre_weight=0.2, rat
 
 
 def get_user_recommendations(user_id, min_ratings=100, top_n=20, genre_weight=0.2, rating_weight=0.1):
-    """Generate recommendations based on all anime a user has watched."""
     watched = get_user_watched(user_id)
     if watched.empty:
         return pd.DataFrame()
@@ -86,7 +81,6 @@ def get_user_recommendations(user_id, min_ratings=100, top_n=20, genre_weight=0.
         if recs is not None:
             all_recs = pd.concat([all_recs, recs])
 
-    # Remove watched anime and aggregate
     all_recs = all_recs[~all_recs["anime_id"].isin(watched_ids)]
     final = all_recs.groupby(["anime_id", "name"], as_index=False).agg({"final_score": "mean"})
     return final.sort_values("final_score", ascending=False).head(top_n)

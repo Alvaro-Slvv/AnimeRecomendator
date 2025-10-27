@@ -3,7 +3,6 @@
 import pickle
 import json
 from pathlib import Path
-import pandas as pd
 from datetime import datetime
 from Back.Trainer.preprocess import load_and_clean_data
 
@@ -14,23 +13,19 @@ MODELS_DIR.mkdir(exist_ok=True)
 MODEL_TRACK_FILE = DATA_DIR / "current_model.json"
 
 def get_current_model_version() -> str:
-    """Return the current model version from tracking file."""
     if MODEL_TRACK_FILE.exists():
         with open(MODEL_TRACK_FILE, "r") as f:
             data = json.load(f)
         return data.get("current_version", "v0")
     return "v0"
 
-
 def train_model():
-    """Train a new correlation matrix and version it."""
     anime, ratings = load_and_clean_data(DATA_DIR)
 
     print("📈 Building correlation matrix...")
     pivot = ratings.pivot_table(index="user_id", columns="anime_id", values="rating")
     corr_matrix = pivot.corr(method="pearson", min_periods=10)
 
-    # Versioning
     current_version = get_current_model_version()
     new_version_num = int(current_version.strip("v")) + 1 if current_version != "v0" else 1
     new_version = f"v{new_version_num}"
@@ -45,7 +40,6 @@ def train_model():
     with open(meta_path, "wb") as f:
         pickle.dump(meta, f)
 
-    # Update tracker
     with open(MODEL_TRACK_FILE, "w") as f:
         json.dump({"current_version": new_version}, f, indent=4)
 

@@ -35,3 +35,10 @@ class DataDAO:
         with open(self.model_track_file, "r", encoding="utf-8") as f:
             data = json.load(f)
         return data.get("current_model_version", "none")
+
+    def train_model(self):
+        """Entrena el modelo y devuelve los metadatos y la versión"""
+        from Back.Trainer.trainer import train_model
+        meta = train_model()
+        version = self.get_current_model_version()
+        return meta, version

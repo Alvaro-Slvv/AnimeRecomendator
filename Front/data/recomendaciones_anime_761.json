@@ -1,0 +1,122 @@
+[
+    {
+        "anime_id": 761,
+        "similarity": 1.0,
+        "num_ratings": 3316,
+        "avg_rating": 4.476779252110977,
+        "name": "Naruto: Akaki Yotsuba no Clover wo Sagase",
+        "genre": "Adventure, Comedy, Shounen",
+        "rating": 6.55,
+        "genre_sim": 1.0,
+        "rating_diff": 1.0,
+        "final_score": 1.0000000000000002
+    },
+    {
+        "anime_id": 1427,
+        "similarity": 0.8201634762403806,
+        "num_ratings": 119,
+        "avg_rating": 4.378151260504202,
+        "name": "Lupin III: Ikiteita Majutsushi",
+        "genre": "Adventure, Comedy, Shounen",
+        "rating": 6.28,
+        "genre_sim": 1.0,
+        "rating_diff": 0.9730000000000001,
+        "final_score": 0.8714144333682664
+    },
+    {
+        "anime_id": 1074,
+        "similarity": 0.8328935710351986,
+        "num_ratings": 2972,
+        "avg_rating": 4.612045760430687,
+        "name": "Naruto Narutimate Hero 3: Tsuini Gekitotsu! Jounin vs. Genin!! Musabetsu Dairansen taikai Kaisai!!",
+        "genre": "Adventure, Comedy, Game, Shounen",
+        "rating": 6.87,
+        "genre_sim": 0.75,
+        "rating_diff": 0.968,
+        "final_score": 0.829825499724639
+    },
+    {
+        "anime_id": 1424,
+        "similarity": 0.7498804353258742,
+        "num_ratings": 113,
+        "avg_rating": 5.575221238938053,
+        "name": "Lupin III: Otakara Henkyaku Daisakusen!!",
+        "genre": "Adventure, Comedy, Shounen",
+        "rating": 7.55,
+        "genre_sim": 1.0,
+        "rating_diff": 0.9,
+        "final_score": 0.8149163047281119
+    },
+    {
+        "anime_id": 594,
+        "similarity": 0.8234192980082373,
+        "num_ratings": 3696,
+        "avg_rating": 4.82034632034632,
+        "name": "Naruto: Takigakure no Shitou - Ore ga Eiyuu Dattebayo!",
+        "genre": "Action, Adventure, Comedy, Shounen, Super Power",
+        "rating": 6.83,
+        "genre_sim": 0.6,
+        "rating_diff": 0.972,
+        "final_score": 0.7935935086057662
+    },
+    {
+        "anime_id": 1420,
+        "similarity": 0.7714100834667141,
+        "num_ratings": 114,
+        "avg_rating": 4.745614035087719,
+        "name": "Lupin III: Russia yori Ai wo Komete",
+        "genre": "Action, Adventure, Comedy, Shounen",
+        "rating": 6.93,
+        "genre_sim": 0.75,
+        "rating_diff": 0.962,
+        "final_score": 0.7861870584266999
+    },
+    {
+        "anime_id": 10916,
+        "similarity": 0.8632073266150664,
+        "num_ratings": 192,
+        "avg_rating": 4.614583333333333,
+        "name": "Pokemon: Pikachu no Fuyuyasumi (2000)",
+        "genre": "Adventure, Comedy, Fantasy, Kids",
+        "rating": 6.67,
+        "genre_sim": 0.4,
+        "rating_diff": 0.988,
+        "final_score": 0.7830451286305466
+    },
+    {
+        "anime_id": 10917,
+        "similarity": 0.8418993482691883,
+        "num_ratings": 180,
+        "avg_rating": 4.25,
+        "name": "Pokemon: Pikachu no Fuyuyasumi (2001)",
+        "genre": "Adventure, Comedy, Fantasy, Kids",
+        "rating": 6.64,
+        "genre_sim": 0.4,
+        "rating_diff": 0.991,
+        "final_score": 0.7684295437884319
+    },
+    {
+        "anime_id": 1663,
+        "similarity": 0.9181890875398397,
+        "num_ratings": 117,
+        "avg_rating": 5.752136752136752,
+        "name": "Haha wo Tazunete Sanzenri",
+        "genre": "Adventure, Drama, Historical, Slice of Life",
+        "rating": 7.39,
+        "genre_sim": 0.16666666666666666,
+        "rating_diff": 0.916,
+        "final_score": 0.7676656946112212
+    },
+    {
+        "anime_id": 1415,
+        "similarity": 0.7336324423780304,
+        "num_ratings": 130,
+        "avg_rating": 5.046153846153846,
+        "name": "Lupin III: Bye Bye Liberty - Kiki Ippatsu!",
+        "genre": "Action, Adventure, Comedy, Shounen",
+        "rating": 7.03,
+        "genre_sim": 0.75,
+        "rating_diff": 0.952,
+        "final_score": 0.7587427096646213
+    }
+]

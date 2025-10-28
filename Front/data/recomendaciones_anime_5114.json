@@ -1,0 +1,122 @@
+[
+    {
+        "anime_id": 5114,
+        "similarity": 1.0,
+        "num_ratings": 24574,
+        "avg_rating": 8.028933018637584,
+        "name": "Fullmetal Alchemist: Brotherhood",
+        "genre": "Action, Adventure, Drama, Fantasy, Magic, Military, Shounen",
+        "rating": 9.26,
+        "genre_sim": 1.0,
+        "rating_diff": 1.0,
+        "final_score": 1.0000000000000002
+    },
+    {
+        "anime_id": 6421,
+        "similarity": 0.4442943613647372,
+        "num_ratings": 2846,
+        "avg_rating": 5.993675333801827,
+        "name": "Fullmetal Alchemist: Brotherhood Specials",
+        "genre": "Adventure, Drama, Fantasy, Magic, Military, Shounen",
+        "rating": 8.11,
+        "genre_sim": 0.8571428571428571,
+        "rating_diff": 0.885,
+        "final_score": 0.5709346243838875
+    },
+    {
+        "anime_id": 1301,
+        "similarity": 0.5741278057886621,
+        "num_ratings": 272,
+        "avg_rating": 6.022058823529412,
+        "name": "Ginga Tetsudou 999 (Movie)",
+        "genre": "Adventure, Drama, Fantasy, Sci-Fi, Space",
+        "rating": 7.76,
+        "genre_sim": 0.3333333333333333,
+        "rating_diff": 0.85,
+        "final_score": 0.5535561307187301
+    },
+    {
+        "anime_id": 121,
+        "similarity": 0.3714651516281818,
+        "num_ratings": 25032,
+        "avg_rating": 7.056048258229466,
+        "name": "Fullmetal Alchemist",
+        "genre": "Action, Adventure, Comedy, Drama, Fantasy, Magic, Military, Shounen",
+        "rating": 8.33,
+        "genre_sim": 0.875,
+        "rating_diff": 0.907,
+        "final_score": 0.5257256061397273
+    },
+    {
+        "anime_id": 2408,
+        "similarity": 0.5058224682000525,
+        "num_ratings": 130,
+        "avg_rating": 5.584615384615384,
+        "name": "Keroro Gunsou Movie 2: Shinkai no Princess de Arimasu!",
+        "genre": "Action, Adventure, Comedy, Drama, Sci-Fi, Shounen",
+        "rating": 7.48,
+        "genre_sim": 0.4444444444444444,
+        "rating_diff": 0.8220000000000001,
+        "final_score": 0.5251646166289257
+    },
+    {
+        "anime_id": 9135,
+        "similarity": 0.33805716882488035,
+        "num_ratings": 3794,
+        "avg_rating": 5.944913020558777,
+        "name": "Fullmetal Alchemist: The Sacred Star of Milos",
+        "genre": "Action, Adventure, Comedy, Drama, Fantasy, Magic, Military, Shounen",
+        "rating": 7.5,
+        "genre_sim": 0.875,
+        "rating_diff": 0.8240000000000001,
+        "final_score": 0.4940400181774163
+    },
+    {
+        "anime_id": 1638,
+        "similarity": 0.5134519845367301,
+        "num_ratings": 122,
+        "avg_rating": 4.983606557377049,
+        "name": "Peter Pan no Bouken",
+        "genre": "Adventure, Fantasy",
+        "rating": 6.91,
+        "genre_sim": 0.2857142857142857,
+        "rating_diff": 0.765,
+        "final_score": 0.4930592463185683
+    },
+    {
+        "anime_id": 1941,
+        "similarity": 0.521947270931191,
+        "num_ratings": 183,
+        "avg_rating": 6.240437158469946,
+        "name": "Moonlight Mile 1st Season: Lift Off",
+        "genre": "Adventure, Drama, Sci-Fi, Space",
+        "rating": 7.27,
+        "genre_sim": 0.2222222222222222,
+        "rating_diff": 0.8009999999999999,
+        "final_score": 0.4899075340962782
+    },
+    {
+        "anime_id": 2113,
+        "similarity": 0.41906952912211154,
+        "num_ratings": 220,
+        "avg_rating": 6.422727272727273,
+        "name": "Tenkuu Senki Shurato",
+        "genre": "Action, Fantasy, Magic, Shounen",
+        "rating": 7.43,
+        "genre_sim": 0.5714285714285714,
+        "rating_diff": 0.817,
+        "final_score": 0.4893343846711924
+    },
+    {
+        "anime_id": 308,
+        "similarity": 0.48760724309136244,
+        "num_ratings": 187,
+        "avg_rating": 5.13903743315508,
+        "name": "Zettai Shounen",
+        "genre": "Drama, Fantasy, Mystery, Sci-Fi, Shounen",
+        "rating": 7.06,
+        "genre_sim": 0.3333333333333333,
+        "rating_diff": 0.78,
+        "final_score": 0.4859917368306204
+    }
+]

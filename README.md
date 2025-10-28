@@ -10,7 +10,18 @@ The main objective is to experiment with different data-oriented machine learnin
 - Genre and rating weight tuning  
 - DAO layer for managing data and model persistence  
 - REST API endpoints for all key operations
-  
+
+## Requirements
+
+- Python 3.10 or higher
+- pip (Python package manager)
+
+## Install dependencies
+
+Run this in the project root:
+```bash
+pip install -r requirements.txt
+```
 ## Endpoints
 | Method | Endpoint | Description |
 | :---: | :--- | :--- |
@@ -25,7 +36,7 @@ The main objective is to experiment with different data-oriented machine learnin
 ### Step 1 — Start the API Server
 
 Open a terminal in the project root and run:
-```
+```bash
 python run_api.py
 ```
 
@@ -34,7 +45,7 @@ This will start the FastAPI backend at:
 🔗 http://127.0.0.1:8000
 
 Expected output:
-```
+```json
 {"message": "Anime Recommendation API is running!"}
 ```
 
@@ -42,12 +53,12 @@ Expected output:
 
 In another terminal (with the API running), execute:
 
-```
+```bash
 python Front/consola.py
 ```
 
 You’ll see the console menu:
-```
+```bash
 === Consola de AnimeRecomendator ===
 1. Obtener recomendaciones
 2. Entrenar el algoritmo

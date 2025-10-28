@@ -20,3 +20,37 @@ The main objective is to experiment with different data-oriented machine learnin
 | GET | /user/{user_id}/watched |	Get anime a user has watched and rated |
 | GET |	/recommend/user/{user_id} |	Recommend new anime for a user |
 | GET |	/recommend/anime/{anime_id} |	Get similar anime to a given anime |
+
+## Running the application
+### Step 1 — Start the API Server
+
+Open a terminal in the project root and run:
+```
+python run_api.py
+```
+
+This will start the FastAPI backend at:
+
+🔗 http://127.0.0.1:8000
+
+Expected output:
+```
+{"message": "Anime Recommendation API is running!"}
+```
+
+### Step 2 — Launch the Console Interface
+
+In another terminal (with the API running), execute:
+
+```
+python Front/consola.py
+```
+
+You’ll see the console menu:
+```
+=== Consola de AnimeRecomendator ===
+1. Obtener recomendaciones
+2. Entrenar el algoritmo
+3. Obtener la versión del modelo
+4. Salir
+```

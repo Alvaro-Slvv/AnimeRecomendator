@@ -6,9 +6,9 @@ This is a small-scale project built using a
 The main objective is to experiment with different data-oriented machine learning approaches and implement an API-based architecture that cleanly separates the backend (model training and recommendation logic) from the frontend (console interface).
 ## Features
 - Automated model training and versioning  
-- User-based and item-based recommendations  
+- User-based and anime-based recommendations  
 - Genre and rating weight tuning  
-- DAO layer for managing data and model persistence  
+- DAO layer separating data access from core logic  
 - REST API endpoints for all key operations
 
 ## Requirements

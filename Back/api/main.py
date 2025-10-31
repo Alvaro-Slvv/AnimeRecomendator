@@ -1,4 +1,5 @@
-from fastapi import FastAPI, HTTPException
+# main.py (API backend) — MySQL ready
+from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
 from typing import Optional
 import traceback
@@ -14,6 +15,7 @@ from Back.Recommendator.recommender import (
 app = FastAPI(title="Anime Recommendation API")
 dao = DataDAO()
 
+
 class RecommendationRequest(BaseModel):
     anime_id: Optional[int] = None
     user_id: Optional[int] = None
@@ -22,9 +24,31 @@ class RecommendationRequest(BaseModel):
     genre_weight: float = 0.2
     rating_weight: float = 0.1
 
+
 @app.get("/")
 def root():
     return {"message": "Anime Recommendation API running"}
+
+
+@app.get("/anime/search")
+def search_anime(query: str = Query(..., description="Anime name or ID to search")):
+    """Search anime by name or ID from the database."""
+    try:
+        anime_df = dao.load_anime()
+
+        if query.isdigit():
+            result = anime_df[anime_df["anime_id"] == int(query)]
+        else:
+            result = anime_df[anime_df["name"].str.lower().str.contains(query.lower(), na=False)]
+
+        if result.empty:
+            raise HTTPException(status_code=404, detail="No anime found for this query")
+
+        return result.to_dict(orient="records")
+    except Exception as e:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.post("/train")
 def train():
@@ -36,6 +60,7 @@ def train():
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.get("/model-version")
 def get_model_version():
     try:
@@ -43,6 +68,7 @@ def get_model_version():
         return {"current_model_version": version}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.get("/user/{user_id}/watched")
 def get_watched(user_id: int):
@@ -55,6 +81,7 @@ def get_watched(user_id: int):
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.get("/recommend/user/{user_id}")
 def recommend_for_user(user_id: int):
     try:
@@ -65,6 +92,7 @@ def recommend_for_user(user_id: int):
     except Exception as e:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.get("/recommend/anime/{anime_id}")
 def recommend_for_anime(anime_id: int, top_n: int = 10):

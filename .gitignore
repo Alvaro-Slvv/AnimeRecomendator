@@ -209,3 +209,4 @@ __marimo__/
 # Ignore pickle files
 *.pkl
 *.csv
+*.json

@@ -5,3 +5,6 @@ scikit-learn==1.5.2
 requests==2.32.3
 numpy==1.26.4
 joblib==1.4.2
+sqlalchemy
+pymysql
+tqdm==4.66.5

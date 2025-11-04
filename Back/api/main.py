@@ -4,7 +4,8 @@ from pydantic import BaseModel
 from typing import Optional
 import traceback
 
-from Back.Data.dao import DataDAO
+from Back.Data.animeDAO import AnimeDAO
+from Back.Data.userDAO import UserDAO
 from Back.Trainer.trainer import train_model
 from Back.Recommendator.recommender import (
     get_user_watched,
@@ -13,7 +14,8 @@ from Back.Recommendator.recommender import (
 )
 
 app = FastAPI(title="Anime Recommendation API")
-dao = DataDAO()
+anime_dao = AnimeDAO()
+user_dao = UserDAO()
 
 
 class RecommendationRequest(BaseModel):
@@ -29,12 +31,41 @@ class RecommendationRequest(BaseModel):
 def root():
     return {"message": "Anime Recommendation API running"}
 
+# Models
+class AuthRequest(BaseModel):
+    username: str
+    password: str
+
+
+@app.post("/auth/register")
+def register_user(req: AuthRequest):
+    try:
+        result = user_dao.create_user(req.username, req.password)
+        if result["status"] == "error":
+            raise HTTPException(status_code=400, detail=result["message"])
+        return result
+    except Exception as e:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/auth/login")
+def login_user(req: AuthRequest):
+    try:
+        result = user_dao.authenticate_user(req.username, req.password)
+        if result["status"] == "error":
+            raise HTTPException(status_code=401, detail=result["message"])
+        return result
+    except Exception as e:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.get("/anime/search")
 def search_anime(query: str = Query(..., description="Anime name or ID to search")):
     """Search anime by name or ID from the database."""
     try:
-        anime_df = dao.load_anime()
+        anime_df = anime_dao.load_anime()
 
         if query.isdigit():
             result = anime_df[anime_df["anime_id"] == int(query)]
@@ -54,7 +85,7 @@ def search_anime(query: str = Query(..., description="Anime name or ID to search
 def train():
     try:
         meta = train_model()
-        version = dao.get_current_model_version()
+        version = anime_dao.get_current_model_version()
         return {"status": "success", "version": version, "meta": meta}
     except Exception as e:
         traceback.print_exc()
@@ -64,7 +95,7 @@ def train():
 @app.get("/model-version")
 def get_model_version():
     try:
-        version = dao.get_current_model_version()
+        version = anime_dao.get_current_model_version()
         return {"current_model_version": version}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

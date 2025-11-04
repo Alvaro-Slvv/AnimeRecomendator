@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, text
 from datetime import datetime
 
 
-class DataDAO:
+class AnimeDAO:
     """
     Data Access Object for the anime recommendation system.
     Uses MySQL through SQLAlchemy (officially supported by pandas).

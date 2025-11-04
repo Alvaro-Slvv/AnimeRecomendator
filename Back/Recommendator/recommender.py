@@ -1,9 +1,9 @@
 import pandas as pd
 import pickle
 from pathlib import Path
-from Back.Data.dao import DataDAO
+from Back.Data.animeDAO import AnimeDAO
 
-dao = DataDAO()
+dao = AnimeDAO()
 MODEL_DIR = Path("Back/Model")
 
 

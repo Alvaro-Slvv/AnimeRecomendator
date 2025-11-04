@@ -3,9 +3,9 @@ import os
 import pickle
 from datetime import datetime
 from pathlib import Path
-from Back.Data.dao import DataDAO
+from Back.Data.animeDAO import AnimeDAO
 
-dao = DataDAO()
+dao = AnimeDAO()
 
 
 def train_model():

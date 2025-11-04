@@ -20,16 +20,6 @@ The main objective is to experiment with different data-oriented machine learnin
 - **MySQL 8.0 or higher**
 - **pip** (Python package manager)
 
-## Install dependencies
-
-Run this in the project root:
-```bash
-pip install -r requirements.txt
-```
-
-If installation fails due to compatibility (e.g., NumPy build issues),  
-the launcher will automatically retry with safe fallback versions.
-
 ## Environment Setup
 
 Create a `.env` file in the project root with the following content:

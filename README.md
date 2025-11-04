@@ -7,11 +7,10 @@ The main objective is to experiment with different data-oriented machine learnin
 
 ## Features
 - Automated model training and versioning  
-- User-based and anime-based recommendations  
+- Anime-based recommendations  
 - Genre and rating weight tuning  
 - DAO layer separating data access from core logic  
 - REST API endpoints for all key operations  
-- MySQL database integration replacing CSV data sources  
 - Environment-based configuration using `.env`  
 - Single-command launcher (`run_all.py`) for full stack startup  
 
@@ -20,16 +19,6 @@ The main objective is to experiment with different data-oriented machine learnin
 - **Python 3.9 or higher**
 - **MySQL 8.0 or higher**
 - **pip** (Python package manager)
-
-## Install dependencies
-
-Run this in the project root:
-```bash
-pip install -r requirements.txt
-```
-
-If installation fails due to compatibility (e.g., NumPy build issues),  
-the launcher will automatically retry with safe fallback versions.
 
 ## Environment Setup
 
@@ -65,7 +54,6 @@ API_PORT=8000
 ## Running the application
 ### Step 1 — Launch the full system automatically
 
-You no longer need to start the API and frontend separately.  
 Simply run:
 
 ```bash
@@ -87,8 +75,7 @@ You’ll see the console menu:
 1. Obtener recomendaciones
 2. Entrenar el algoritmo
 3. Obtener la versión del modelo
-4. Registrar / iniciar sesión
-5. Salir
+4. Salir
 ```
 
 ### Step 3 — API Access

@@ -9,12 +9,12 @@ from dotenv import load_dotenv
 
 # === Python version check ===
 if sys.version_info < (3, 9):
-    print("❌ Python 3.9 or higher is required to run this project.")
+    print("Python 3.9 or higher is required to run this project.")
     sys.exit(1)
 
 # === Load environment ===
 if not os.path.exists(".env"):
-    print("❌ Missing .env file in project root.")
+    print("Missing .env file in project root.")
     sys.exit(1)
 
 load_dotenv()
@@ -37,27 +37,27 @@ FRONTEND_COMMAND = ["python", "Front/consola.py"]
 # === Step 1: Install dependencies with auto-fallback ===
 def install_requirements():
     """Install dependencies and handle fallback for new Python versions."""
-    print("📦 Checking dependencies (requirements.txt)...")
+    print("Checking dependencies (requirements.txt)...")
     try:
         subprocess.run(
             [sys.executable, "-m", "pip", "install", "-r", "requirements.txt"],
             check=True
         )
-        print("✅ Dependencies installed.\n")
+        print("Dependencies installed.\n")
 
     except subprocess.CalledProcessError:
-        print("⚠️  Pip install failed — trying automatic recovery...")
+        print("Pip install failed — trying automatic recovery...")
         subprocess.run([sys.executable, "-m", "pip", "install", "--upgrade", "pip", "setuptools", "wheel"])
         subprocess.run([sys.executable, "-m", "pip", "install", "--pre", "numpy>=2.0.0"])
         subprocess.run(
             [sys.executable, "-m", "pip", "install", "-r", "requirements.txt"],
             check=False
         )
-        print("✅ Dependencies recovered successfully.\n")
+        print("Dependencies recovered successfully.\n")
 
 # === Step 2: Ensure DB & Tables ===
 def setup_database():
-    print("🗄️  Checking MySQL database...")
+    print("Checking MySQL database...")
     try:
         conn = pymysql.connect(
             host=MYSQL["host"],
@@ -110,10 +110,10 @@ def setup_database():
         for ddl in tables.values():
             cur.execute(ddl)
 
-        print("✅ Database and tables ready.\n")
+        print("Database and tables ready.\n")
 
     except Exception as e:
-        print(f"❌ MySQL setup failed: {e}")
+        print(f"MySQL setup failed: {e}")
         sys.exit(1)
     finally:
         conn.close()
@@ -130,28 +130,28 @@ def api_is_running():
     return False
 
 def start_api():
-    print("🚀 Starting API server...")
+    print("Starting API server...")
     process = subprocess.Popen(API_COMMAND, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    print(f"📡 API started with PID {process.pid}")
+    print(f"API started with PID {process.pid}")
     return process
 
 def wait_for_api_ready(timeout=30):
-    print("⌛ Waiting for API to become ready...")
+    print("Waiting for API to become ready...")
     start = time.time()
     while time.time() - start < timeout:
         try:
             if requests.get(API_URL).status_code == 200:
-                print("✅ API is ready!\n")
+                print("API is ready!\n")
                 return True
         except requests.ConnectionError:
             pass
         time.sleep(1)
-    print("❌ API did not start within timeout.")
+    print("API did not start within timeout.")
     return False
 
 # === Step 4: Launch Frontend ===
 def run_frontend():
-    print("🖥️  Launching AnimeRecomendator CLI...\n")
+    print("Launching AnimeRecomendator CLI...\n")
     subprocess.run(FRONTEND_COMMAND)
 
 # === Step 5: Main Orchestration ===
@@ -165,17 +165,17 @@ def main():
         if not api_running:
             api_process = start_api()
             if not wait_for_api_ready():
-                print("❌ Could not connect to API. Exiting.")
+                print("Could not connect to API. Exiting.")
                 if api_process:
                     api_process.terminate()
                 sys.exit(1)
         else:
-            print("✅ Using existing API server.\n")
+            print("Using existing API server.\n")
 
         run_frontend()
 
     except KeyboardInterrupt:
-        print("\n🛑 Stopping...")
+        print("\nStopping...")
     finally:
         if api_process:
             print("🔻 Stopping API server...")
@@ -185,7 +185,7 @@ def main():
                 else:
                     api_process.terminate()
                 api_process.wait(timeout=5)
-                print("✅ API server stopped.")
+                print("API server stopped.")
             except Exception:
                 pass
 
